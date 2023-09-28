@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EFDC1E83-3AC7-49F0-9B14-32EDFFFFC5A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infastructure", "Infastructure", "{5D11160B-9743-44BC-9709-9B2390B253BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{90125505-03CE-4F49-9B37-F51A29A06BD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HizliLezzetAPI.Application", "Core\HizliLezzetAPI.Application\HizliLezzetAPI.Application.csproj", "{E4113722-410E-4879-B42D-8E8E71BAADA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HizliLezzetAPI.Domain", "Core\HizliLezzetAPI.Domain\HizliLezzetAPI.Domain.csproj", "{1C6A9C33-CF71-4D67-9936-42991CA98C12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HizliLezzetAPI.Persistence", "Infastructure\HizliLezzetAPI.Persistence\HizliLezzetAPI.Persistence.csproj", "{015004C5-4D4E-4CF2-BC83-EF18C515E1B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HizliLezzetAPI.WebAPI", "WebAPI\HizliLezzetAPI.WebAPI\HizliLezzetAPI.WebAPI.csproj", "{E808FF62-AA2B-4BD2-9B19-C020F56242DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4113722-410E-4879-B42D-8E8E71BAADA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4113722-410E-4879-B42D-8E8E71BAADA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4113722-410E-4879-B42D-8E8E71BAADA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4113722-410E-4879-B42D-8E8E71BAADA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C6A9C33-CF71-4D67-9936-42991CA98C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6A9C33-CF71-4D67-9936-42991CA98C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6A9C33-CF71-4D67-9936-42991CA98C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6A9C33-CF71-4D67-9936-42991CA98C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015004C5-4D4E-4CF2-BC83-EF18C515E1B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015004C5-4D4E-4CF2-BC83-EF18C515E1B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015004C5-4D4E-4CF2-BC83-EF18C515E1B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015004C5-4D4E-4CF2-BC83-EF18C515E1B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E808FF62-AA2B-4BD2-9B19-C020F56242DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E808FF62-AA2B-4BD2-9B19-C020F56242DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E808FF62-AA2B-4BD2-9B19-C020F56242DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E808FF62-AA2B-4BD2-9B19-C020F56242DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4113722-410E-4879-B42D-8E8E71BAADA9} = {EFDC1E83-3AC7-49F0-9B14-32EDFFFFC5A4}
+		{1C6A9C33-CF71-4D67-9936-42991CA98C12} = {EFDC1E83-3AC7-49F0-9B14-32EDFFFFC5A4}
+		{015004C5-4D4E-4CF2-BC83-EF18C515E1B4} = {5D11160B-9743-44BC-9709-9B2390B253BF}
+		{E808FF62-AA2B-4BD2-9B19-C020F56242DB} = {90125505-03CE-4F49-9B37-F51A29A06BD4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21E4B3BB-DB8E-440B-AAA8-152FDB49094D}
+	EndGlobalSection
+EndGlobal

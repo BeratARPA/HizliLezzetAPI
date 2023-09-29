@@ -4,7 +4,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hizlilezzetwebapivault.vault.azure.net/",
         "AZURE_USERNAME": "ali.yorulmaz@campus.netkent.edu.tr"
       },
@@ -15,7 +15,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hizlilezzetwebapivault.vault.azure.net/",
         "AZURE_USERNAME": "ali.yorulmaz@campus.netkent.edu.tr"
       },
@@ -26,7 +26,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hizlilezzetwebapivault.vault.azure.net/",
         "AZURE_USERNAME": "ali.yorulmaz@campus.netkent.edu.tr"
       },

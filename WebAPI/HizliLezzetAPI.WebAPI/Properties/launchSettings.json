@@ -1,35 +1,26 @@
 {
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:5000",
-      "sslPort": 44375
-    }
-  },
   "profiles": {
     "http": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hizlilezzetwebapivault.vault.azure.net/",
         "AZURE_USERNAME": "ali.yorulmaz@campus.netkent.edu.tr"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5000"
     },
     "https": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hizlilezzetwebapivault.vault.azure.net/",
         "AZURE_USERNAME": "ali.yorulmaz@campus.netkent.edu.tr"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:5000"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -38,7 +29,17 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "VaultUri": "https://hizlilezzetwebapivault.vault.azure.net/",
         "AZURE_USERNAME": "ali.yorulmaz@campus.netkent.edu.tr"
-      }
+      },
+      "ancmHostingModel": "OutOfProcess"
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:5000",
+      "sslPort": 44375
     }
   }
 }

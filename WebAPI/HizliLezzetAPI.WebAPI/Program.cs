@@ -1,4 +1,5 @@
 using HizliLezzetAPI.Application;
+using HizliLezzetAPI.Application.Interfaces.Repositories;
 using HizliLezzetAPI.Domain.Entities;
 using HizliLezzetAPI.Persistence;
 using HizliLezzetAPI.Persistence.Context;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -14,16 +16,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplicationServices();
-builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddPersistenceServices();
 
-// JWT Authentication
+var services = builder.Services.BuildServiceProvider();
+
+var secretsRepositoryAsync = services.GetRequiredService<ISecretsRepositoryAsync>();
+var secretKey = secretsRepositoryAsync.GetSecretAsync("JWT").Result;
+var azureMSSQLConnectionString = secretsRepositoryAsync.GetSecretAsync("AzureMSSQL").Result;
+
+//Add Database Context
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(azureMSSQLConnectionString);
+});
+
+//JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SecretKey"])),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
             ValidateIssuer = false,
             ValidateAudience = false
         };
@@ -76,7 +90,7 @@ builder.Services.AddSwaggerGen(options =>
         Type = SecuritySchemeType.Http,
         Scheme = "Bearer"
     });
-    
+
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {

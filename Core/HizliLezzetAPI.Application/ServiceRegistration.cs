@@ -12,7 +12,8 @@ namespace HizliLezzetAPI.Application
             var assembly = Assembly.GetExecutingAssembly();
             
             serviceCollection.AddAutoMapper(assembly);
-            serviceCollection.AddMediatR(assembly);
+            serviceCollection.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));     
+            
             serviceCollection.AddTransient<JwtTokenGenerator>();
         }
     }

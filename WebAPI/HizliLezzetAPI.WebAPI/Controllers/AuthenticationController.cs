@@ -1,11 +1,11 @@
-﻿using HizliLezzetAPI.Application.Wrappers;
+﻿using HizliLezzetAPI.Application.Services;
+using HizliLezzetAPI.Application.Wrappers;
 using HizliLezzetAPI.Domain.Entities;
 using HizliLezzetAPI.WebApi.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using HizliLezzetAPI.Application.Services;
 
 namespace HizliLezzetAPI.WebApi.Controllers
 {

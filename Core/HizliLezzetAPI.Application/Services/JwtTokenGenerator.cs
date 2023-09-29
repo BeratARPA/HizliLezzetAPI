@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HizliLezzetAPI.Application.Interfaces.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,10 +10,12 @@ namespace HizliLezzetAPI.Application.Services
     public class JwtTokenGenerator
     {
         private readonly IConfiguration config;
+        private readonly ISecretsRepositoryAsync secretsRepositoryAsync;
 
-        public JwtTokenGenerator(IConfiguration config)
+        public JwtTokenGenerator(IConfiguration config,ISecretsRepositoryAsync secretsRepositoryAsync)
         {
             this.config = config;
+            this.secretsRepositoryAsync = secretsRepositoryAsync;
         }
 
         public string GenerateJwtToken(string userId, string username, string userEmail)
@@ -24,7 +27,9 @@ namespace HizliLezzetAPI.Application.Services
                 new Claim(ClaimTypes.Email, userEmail),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["SecretKey"]));
+            var secretKey = secretsRepositoryAsync.GetSecretAsync("JWT").Result;
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor

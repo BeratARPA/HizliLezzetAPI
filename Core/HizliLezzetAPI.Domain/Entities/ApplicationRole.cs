@@ -4,5 +4,6 @@ namespace HizliLezzetAPI.Domain.Entities
 {
     public class ApplicationRole : IdentityRole<Guid>
     {
+
     }
 }

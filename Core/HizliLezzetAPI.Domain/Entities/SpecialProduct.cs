@@ -8,5 +8,7 @@ namespace HizliLezzetAPI.Domain.Entities
         public Guid ProductId { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
+
+        public virtual Product Product { get; set; }      
     }
 }

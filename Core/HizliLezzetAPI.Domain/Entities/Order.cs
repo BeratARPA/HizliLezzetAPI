@@ -12,6 +12,8 @@ namespace HizliLezzetAPI.Domain.Entities
         public string CreatedUserName { get; set; }
         public string LastModifiedUserName { get; set; }
         public DateTime DateTime { get; set; }
-        public DateTime LastModifiedDateTime { get; set; }     
+        public DateTime LastModifiedDateTime { get; set; }
+
+        public virtual Ticket Ticket{ get; set; }
     }
 }

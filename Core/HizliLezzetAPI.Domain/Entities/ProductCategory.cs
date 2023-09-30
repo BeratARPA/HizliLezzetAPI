@@ -9,5 +9,7 @@ namespace HizliLezzetAPI.Domain.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public string Thumbnail { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

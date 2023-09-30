@@ -8,5 +8,9 @@ namespace HizliLezzetAPI.Domain.Entities
         public string Name { get; set; }
         public string Title { get; set; }
         public string Thumbnail { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
+
+        public virtual RestaurantTableSection RestaurantTableSection { get; set; }
     }
 }

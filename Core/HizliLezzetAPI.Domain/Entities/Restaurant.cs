@@ -26,5 +26,8 @@ namespace HizliLezzetAPI.Domain.Entities
         public bool IsActiveYemekSepeti { get; set; }
         public bool IsActiveMigrosYemek { get; set; }
         public bool IsActiveTrendyolYemek { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<RestaurantTableSection> RestaurantTableSections { get; set; }
     }
 }

@@ -20,5 +20,11 @@ namespace HizliLezzetAPI.Domain.Entities
         public DateTime LastModifiedDateTime { get; set; }
         public DateTime LastOrderDateTime { get; set; }
         public DateTime LastPaymentDateTime { get; set; }
+
+        public virtual Restaurant Restaurant { get; set; }
+        public virtual RestaurantTable RestaurantTable { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

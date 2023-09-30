@@ -12,5 +12,7 @@ namespace HizliLezzetAPI.Domain.Entities
         public string Thumbnail { get; set; }
         public bool IsDefault { get; set; }
         public decimal Quantity { get; set; }
+
+        public virtual Product Product { get; set; }
     }
 }

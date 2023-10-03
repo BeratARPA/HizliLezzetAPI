@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using HizliLezzetAPI.Application.Features.Commands.CreateProduct;
+using HizliLezzetAPI.Application.Features.Commands.Product.Create;
+using HizliLezzetAPI.Application.Features.Commands.Product.DeleteById;
+using HizliLezzetAPI.Application.Features.Commands.Product.UpdateById;
 
 namespace HizliLezzetAPI.Application.Mapping
 {
@@ -11,6 +13,10 @@ namespace HizliLezzetAPI.Application.Mapping
                 .ReverseMap();
             CreateMap<Domain.Entities.Product, CreateProductCommand>()
                 .ReverseMap();
+            CreateMap<Domain.Entities.Product, DeleteProductByIdCommand>()
+             .ReverseMap();
+            CreateMap<Domain.Entities.Product, UpdateProductCommand>()
+             .ReverseMap();
         }
     }
 }

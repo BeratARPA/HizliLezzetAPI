@@ -1,6 +1,8 @@
-﻿using HizliLezzetAPI.Application.Features.Commands.CreateProduct;
-using HizliLezzetAPI.Application.Features.Queries.GetAllProducts;
-using HizliLezzetAPI.Application.Features.Queries.GetProductById;
+﻿using HizliLezzetAPI.Application.Features.Commands.Product.Create;
+using HizliLezzetAPI.Application.Features.Commands.Product.DeleteById;
+using HizliLezzetAPI.Application.Features.Commands.Product.UpdateById;
+using HizliLezzetAPI.Application.Features.Queries.Product.GetAll;
+using HizliLezzetAPI.Application.Features.Queries.Product.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,5 +34,20 @@ namespace HizliLezzetAPI.WebApi.Controllers
         {
             return Ok(await mediator.Send(createProductCommand));
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdateProductCommand updateProductCommand)
+        {
+            return Ok(await mediator.Send(updateProductCommand));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var query = new DeleteProductByIdCommand() { Id = id };
+
+            return Ok(await mediator.Send(query));
+        }
+
     }
 }

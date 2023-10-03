@@ -21,4 +21,9 @@
     <ProjectReference Include="..\HizliLezzetAPI.Domain\HizliLezzetAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Commands\Product\Dtos\" />
+    <Folder Include="Features\Queries\Product\Dtos\" />
+  </ItemGroup>
+
 </Project>

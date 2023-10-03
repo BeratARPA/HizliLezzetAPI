@@ -3,9 +3,9 @@ using HizliLezzetAPI.Application.Interfaces.Repositories;
 using HizliLezzetAPI.Application.Wrappers;
 using MediatR;
 
-namespace HizliLezzetAPI.Application.Features.Commands.CreateProduct
+namespace HizliLezzetAPI.Application.Features.Commands.Product.UpdateById
 {
-    public class CreateProductCommand : IRequest<ServiceResponse<Guid>>
+    public class UpdateProductCommand : IRequest<ServiceResponse<Guid>>
     {
         public Guid RestaurantId { get; set; }
         public Guid ProductCategoryId { get; set; }
@@ -22,23 +22,23 @@ namespace HizliLezzetAPI.Application.Features.Commands.CreateProduct
         public bool IsActiveMigrosYemek { get; set; }
         public bool IsActiveTrendyolYemek { get; set; }
 
-        public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ServiceResponse<Guid>>
+        public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, ServiceResponse<Guid>>
         {
             private readonly IProductRepository productRepository;
             private readonly IMapper mapper;
 
-            public CreateProductCommandHandler(IProductRepository productRepository, IMapper mapper)
+            public UpdateProductCommandHandler(IProductRepository productRepository, IMapper mapper)
             {
                 this.productRepository = productRepository;
                 this.mapper = mapper;
             }
 
-            public async Task<ServiceResponse<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+            public async Task<ServiceResponse<Guid>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
             {
-                var product = mapper.Map<Domain.Entities.Product>(request);
-                await productRepository.AddAsync(product);
+                var updatedProduct = mapper.Map<Domain.Entities.Product>(request);
+                await productRepository.UpdateAsync(updatedProduct);
 
-                return new ServiceResponse<Guid>(product.Id);
+                return new ServiceResponse<Guid>(updatedProduct.Id);
             }
         }
     }

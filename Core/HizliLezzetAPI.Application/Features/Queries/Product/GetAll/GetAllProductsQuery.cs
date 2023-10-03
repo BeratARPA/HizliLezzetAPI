@@ -4,7 +4,7 @@ using HizliLezzetAPI.Application.Interfaces.Repositories;
 using HizliLezzetAPI.Application.Wrappers;
 using MediatR;
 
-namespace HizliLezzetAPI.Application.Features.Queries.GetAllProducts
+namespace HizliLezzetAPI.Application.Features.Queries.Product.GetAll
 {
     public class GetAllProductsQuery : IRequest<ServiceResponse<List<ProductViewDto>>>
     {

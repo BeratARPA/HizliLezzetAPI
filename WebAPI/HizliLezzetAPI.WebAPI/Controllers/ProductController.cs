@@ -18,7 +18,7 @@ namespace HizliLezzetAPI.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await mediator.Send(new GetAllProductsQuery()));
+            return Ok(await mediator.Send(new GetAllRestaurantsQuery()));
         }
 
         [HttpGet("{id}")]

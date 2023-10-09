@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HizliLezzetAPI.WebApi.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
+    //[Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class BaseController : ControllerBase

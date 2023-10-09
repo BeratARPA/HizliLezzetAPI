@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HizliLezzetAPI.Application.Dtos;
 using HizliLezzetAPI.Application.Interfaces.Repositories;
 using HizliLezzetAPI.Application.Wrappers;
 using MediatR;

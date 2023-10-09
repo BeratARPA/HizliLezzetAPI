@@ -23,7 +23,9 @@
 
   <ItemGroup>
     <Folder Include="Features\Commands\Product\Dtos\" />
+    <Folder Include="Features\Commands\Restaurant\Dtos\" />
     <Folder Include="Features\Queries\Product\Dtos\" />
+    <Folder Include="Features\Queries\Restaurant\Dtos\" />
   </ItemGroup>
 
 </Project>

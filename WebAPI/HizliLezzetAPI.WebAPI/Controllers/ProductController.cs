@@ -18,7 +18,7 @@ namespace HizliLezzetAPI.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await mediator.Send(new GetAllRestaurantsQuery()));
+            return Ok(await mediator.Send(new GetAllProductsQuery()));
         }
 
         [HttpGet("{id}")]
@@ -48,6 +48,5 @@ namespace HizliLezzetAPI.WebApi.Controllers
 
             return Ok(await mediator.Send(query));
         }
-
     }
 }

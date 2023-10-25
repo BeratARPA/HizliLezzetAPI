@@ -1,5 +1,4 @@
-﻿using HizliLezzetAPI.Application.Interfaces.Repositories;
-using HizliLezzetAPI.Domain.Entities;
+﻿using HizliLezzetAPI.Domain.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

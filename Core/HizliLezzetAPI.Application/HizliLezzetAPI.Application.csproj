@@ -22,9 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Commands\ProductCategory\Dtos\" />
     <Folder Include="Features\Commands\Product\Dtos\" />
+    <Folder Include="Features\Commands\RestaurantTableSection\Dtos\" />
+    <Folder Include="Features\Commands\RestaurantTable\Dtos\" />
     <Folder Include="Features\Commands\Restaurant\Dtos\" />
+    <Folder Include="Features\Queries\ProductCategory\Dtos\" />
     <Folder Include="Features\Queries\Product\Dtos\" />
+    <Folder Include="Features\Queries\RestaurantTableSection\Dtos\" />
+    <Folder Include="Features\Queries\RestaurantTable\Dtos\" />
     <Folder Include="Features\Queries\Restaurant\Dtos\" />
   </ItemGroup>
 

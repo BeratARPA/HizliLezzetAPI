@@ -1,4 +1,10 @@
 ﻿using AutoMapper;
+using HizliLezzetAPI.Application.Features.Commands.Order.Create;
+using HizliLezzetAPI.Application.Features.Commands.Order.DeleteById;
+using HizliLezzetAPI.Application.Features.Commands.Order.UpdateById;
+using HizliLezzetAPI.Application.Features.Commands.Payment.Create;
+using HizliLezzetAPI.Application.Features.Commands.Payment.DeleteById;
+using HizliLezzetAPI.Application.Features.Commands.Payment.UpdateById;
 using HizliLezzetAPI.Application.Features.Commands.Product.Create;
 using HizliLezzetAPI.Application.Features.Commands.Product.DeleteById;
 using HizliLezzetAPI.Application.Features.Commands.Product.UpdateById;
@@ -14,6 +20,9 @@ using HizliLezzetAPI.Application.Features.Commands.RestaurantTable.UpdateById;
 using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.Create;
 using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.DeleteById;
 using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.UpdateById;
+using HizliLezzetAPI.Application.Features.Commands.Ticket.Create;
+using HizliLezzetAPI.Application.Features.Commands.Ticket.DeleteById;
+using HizliLezzetAPI.Application.Features.Commands.Ticket.UpdateById;
 
 namespace HizliLezzetAPI.Application.Mapping
 {
@@ -69,6 +78,36 @@ namespace HizliLezzetAPI.Application.Mapping
             CreateMap<Domain.Entities.RestaurantTableSection, DeleteRestaurantTableSectionByIdCommand>()
              .ReverseMap();
             CreateMap<Domain.Entities.RestaurantTableSection, UpdateRestaurantTableSectionCommand>()
+             .ReverseMap();
+
+            //Order Mapping
+            CreateMap<Domain.Entities.Order, Dtos.OrderViewDto>()
+                .ReverseMap();
+            CreateMap<Domain.Entities.Order, CreateOrderCommand>()
+              .ReverseMap();
+            CreateMap<Domain.Entities.Order, DeleteOrderByIdCommand>()
+             .ReverseMap();
+            CreateMap<Domain.Entities.Order, UpdateOrderCommand>()
+             .ReverseMap();
+
+            //Ticket Mapping
+            CreateMap<Domain.Entities.Ticket, Dtos.TicketViewDto>()
+                .ReverseMap();
+            CreateMap<Domain.Entities.Ticket, CreateTicketCommand>()
+              .ReverseMap();
+            CreateMap<Domain.Entities.Ticket, DeleteTicketByIdCommand>()
+             .ReverseMap();
+            CreateMap<Domain.Entities.Ticket, UpdateTicketCommand>()
+             .ReverseMap();
+
+            //Payment Mapping
+            CreateMap<Domain.Entities.Payment, Dtos.PaymentViewDto>()
+                .ReverseMap();
+            CreateMap<Domain.Entities.Payment, CreatePaymentCommand>()
+              .ReverseMap();
+            CreateMap<Domain.Entities.Payment, DeletePaymentByIdCommand>()
+             .ReverseMap();
+            CreateMap<Domain.Entities.Payment, UpdatePaymentCommand>()
              .ReverseMap();
         }
     }

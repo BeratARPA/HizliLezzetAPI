@@ -10,10 +10,13 @@ namespace HizliLezzetAPI.Persistence
         {
             serviceCollection.AddTransient<IProductRepository, ProductRepository>();
             serviceCollection.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
-            serviceCollection.AddTransient<IRestaurantRepository, RestaurantRepository>();                      
-            serviceCollection.AddTransient<IRestaurantTableRepository, RestaurantTableRepository>();                      
-            serviceCollection.AddTransient<IRestaurantTableSectionRepository, RestaurantTableSectionRepository>();                      
-            serviceCollection.AddTransient<ISecretsRepositoryAsync, AzureKeyVaultRepository>();                      
+            serviceCollection.AddTransient<IRestaurantRepository, RestaurantRepository>();
+            serviceCollection.AddTransient<IRestaurantTableRepository, RestaurantTableRepository>();
+            serviceCollection.AddTransient<IRestaurantTableSectionRepository, RestaurantTableSectionRepository>();
+            serviceCollection.AddTransient<ISecretsRepositoryAsync, AzureKeyVaultRepository>();
+            serviceCollection.AddTransient<IOrderRepository, OrderRepository>();
+            serviceCollection.AddTransient<ITicketRepository, TicketRepository>();
+            serviceCollection.AddTransient<IPaymentRepository, PaymentRepository>();
         }
     }
 }

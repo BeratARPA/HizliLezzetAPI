@@ -7,6 +7,7 @@ namespace HizliLezzetAPI.Application.Features.Commands.ProductCategory.UpdateByI
 {
     public class UpdateProductCategoryCommand : IRequest<ServiceResponse<Guid>>
     {
+        public Guid Id { get; set; }
         public Guid RestaurantId { get; set; }
         public bool PreperationType { get; set; }
         public string Title { get; set; }
@@ -26,10 +27,11 @@ namespace HizliLezzetAPI.Application.Features.Commands.ProductCategory.UpdateByI
 
             public async Task<ServiceResponse<Guid>> Handle(UpdateProductCategoryCommand request, CancellationToken cancellationToken)
             {
-                var updatedProductCategory = mapper.Map<Domain.Entities.ProductCategory>(request);
-                await productCategoryRepository.UpdateAsync(updatedProductCategory);
+                var existingProductCategory = await productCategoryRepository.GetByIdAsync(request.Id);
+                mapper.Map(request, existingProductCategory);
+                await productCategoryRepository.UpdateAsync(existingProductCategory);
 
-                return new ServiceResponse<Guid>(updatedProductCategory.Id);
+                return new ServiceResponse<Guid>(existingProductCategory.Id);
             }
         }
     }

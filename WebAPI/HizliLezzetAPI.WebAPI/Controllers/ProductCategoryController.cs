@@ -1,4 +1,5 @@
-﻿using HizliLezzetAPI.Application.Features.Commands.ProductCategory.Create;
+﻿using HizliLezzetAPI.Application.Features.Commands.Product.UpdateById;
+using HizliLezzetAPI.Application.Features.Commands.ProductCategory.Create;
 using HizliLezzetAPI.Application.Features.Commands.ProductCategory.DeleteById;
 using HizliLezzetAPI.Application.Features.Commands.ProductCategory.UpdateById;
 using HizliLezzetAPI.Application.Features.Queries.ProductCategory.GetAll;
@@ -35,9 +36,14 @@ namespace HizliLezzetAPI.WebApi.Controllers
             return Ok(await mediator.Send(createProductCategoryCommand));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateProductCategoryCommand updateProductCategoryCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateProductCategoryCommand updateProductCategoryCommand)
         {
+            if (id != updateProductCategoryCommand.Id)
+            {
+                return BadRequest("The provided id in the URL does not match the id in the request body.");
+            }
+
             return Ok(await mediator.Send(updateProductCategoryCommand));
         }
 

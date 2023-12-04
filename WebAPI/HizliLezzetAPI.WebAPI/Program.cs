@@ -1,5 +1,4 @@
 using HizliLezzetAPI.Application;
-using HizliLezzetAPI.Application.Interfaces.Repositories;
 using HizliLezzetAPI.Domain.Entities;
 using HizliLezzetAPI.Persistence;
 using HizliLezzetAPI.Persistence.Context;
@@ -18,16 +17,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices();
 
-var services = builder.Services.BuildServiceProvider();
+//var services = builder.Services.BuildServiceProvider();
 
-var secretsRepositoryAsync = services.GetRequiredService<ISecretsRepositoryAsync>();
-var secretKey = secretsRepositoryAsync.GetSecretAsync("JWT").Result;
-var azureMSSQLConnectionString = secretsRepositoryAsync.GetSecretAsync("AzureMSSQL").Result;
+//var secretsRepositoryAsync = services.GetRequiredService<ISecretsRepositoryAsync>();
+//var secretKey = secretsRepositoryAsync.GetSecretAsync("JWT").Result;
+//var azureMSSQLConnectionString = secretsRepositoryAsync.GetSecretAsync("AzureMSSQL").Result;
 
 //Add Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(azureMSSQLConnectionString);
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLLocal"));
 });
 
 //JWT Authentication
@@ -37,7 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT:SecretKey").Value)),
             ValidateIssuer = false,
             ValidateAudience = false
         };

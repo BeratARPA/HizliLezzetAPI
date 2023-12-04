@@ -7,6 +7,7 @@ namespace HizliLezzetAPI.Application.Features.Commands.Product.UpdateById
 {
     public class UpdateProductCommand : IRequest<ServiceResponse<Guid>>
     {
+        public Guid Id { get; set; }
         public Guid RestaurantId { get; set; }
         public Guid ProductCategoryId { get; set; }
         public decimal Kcal { get; set; }
@@ -35,10 +36,11 @@ namespace HizliLezzetAPI.Application.Features.Commands.Product.UpdateById
 
             public async Task<ServiceResponse<Guid>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
             {
-                var updatedProduct = mapper.Map<Domain.Entities.Product>(request);
-                await productRepository.UpdateAsync(updatedProduct);
+                var existingProduct = await productRepository.GetByIdAsync(request.Id);
+                mapper.Map(request, existingProduct);
+                await productRepository.UpdateAsync(existingProduct);
 
-                return new ServiceResponse<Guid>(updatedProduct.Id);
+                return new ServiceResponse<Guid>(existingProduct.Id);
             }
         }
     }

@@ -7,6 +7,7 @@ namespace HizliLezzetAPI.Application.Features.Commands.Restaurant.UpdateById
 {
     public class UpdateRestaurantCommand : IRequest<ServiceResponse<Guid>>
     {
+        public Guid Id { get; set; }
         public Guid RestaurantOwnerId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -43,10 +44,11 @@ namespace HizliLezzetAPI.Application.Features.Commands.Restaurant.UpdateById
 
             public async Task<ServiceResponse<Guid>> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
             {
-                var updatedRestaurant = mapper.Map<Domain.Entities.Restaurant>(request);
-                await restaurantRepository.UpdateAsync(updatedRestaurant);
+                var existingRestaurant = await restaurantRepository.GetByIdAsync(request.Id);
+                mapper.Map(request, existingRestaurant);
+                await restaurantRepository.UpdateAsync(existingRestaurant);
 
-                return new ServiceResponse<Guid>(updatedRestaurant.Id);
+                return new ServiceResponse<Guid>(existingRestaurant.Id);
             }
         }
     }

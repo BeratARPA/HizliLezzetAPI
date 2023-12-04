@@ -35,11 +35,17 @@ namespace HizliLezzetAPI.WebAPI.Controllers
             return Ok(await mediator.Send(createRestaurantCommand));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateRestaurantCommand updateRestaurantCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
         {
+            if (id != updateRestaurantCommand.Id)
+            {
+                return BadRequest("The provided id in the URL does not match the id in the request body.");
+            }
+
             return Ok(await mediator.Send(updateRestaurantCommand));
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)

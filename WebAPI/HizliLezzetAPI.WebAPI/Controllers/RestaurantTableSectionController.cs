@@ -1,11 +1,7 @@
-﻿using HizliLezzetAPI.Application.Features.Commands.Restaurant.Create;
-using HizliLezzetAPI.Application.Features.Commands.Restaurant.DeleteById;
-using HizliLezzetAPI.Application.Features.Commands.Restaurant.UpdateById;
-using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.Create;
+﻿using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.Create;
 using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.DeleteById;
 using HizliLezzetAPI.Application.Features.Commands.RestaurantTableSection.UpdateById;
-using HizliLezzetAPI.Application.Features.Queries.Product.GetAll;
-using HizliLezzetAPI.Application.Features.Queries.Product.GetById;
+using HizliLezzetAPI.Application.Features.Commands.Ticket.UpdateById;
 using HizliLezzetAPI.Application.Features.Queries.RestaurantTableSection.GetAll;
 using HizliLezzetAPI.Application.Features.Queries.RestaurantTableSection.GetById;
 using HizliLezzetAPI.WebApi.Controllers;
@@ -40,9 +36,14 @@ namespace HizliLezzetAPI.WebAPI.Controllers
             return Ok(await mediator.Send(createRestaurantTableSectionCommand));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateRestaurantTableSectionCommand updateRestaurantTableSectionCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateRestaurantTableSectionCommand updateRestaurantTableSectionCommand)
         {
+            if (id != updateRestaurantTableSectionCommand.Id)
+            {
+                return BadRequest("The provided id in the URL does not match the id in the request body.");
+            }
+
             return Ok(await mediator.Send(updateRestaurantTableSectionCommand));
         }
 

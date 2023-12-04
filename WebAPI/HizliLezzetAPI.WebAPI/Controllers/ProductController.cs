@@ -1,6 +1,7 @@
 ﻿using HizliLezzetAPI.Application.Features.Commands.Product.Create;
 using HizliLezzetAPI.Application.Features.Commands.Product.DeleteById;
 using HizliLezzetAPI.Application.Features.Commands.Product.UpdateById;
+using HizliLezzetAPI.Application.Features.Commands.RestaurantTable.UpdateById;
 using HizliLezzetAPI.Application.Features.Queries.Product.GetAll;
 using HizliLezzetAPI.Application.Features.Queries.Product.GetById;
 using MediatR;
@@ -35,9 +36,14 @@ namespace HizliLezzetAPI.WebApi.Controllers
             return Ok(await mediator.Send(createProductCommand));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateProductCommand updateProductCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateProductCommand updateProductCommand)
         {
+            if (id != updateProductCommand.Id)
+            {
+                return BadRequest("The provided id in the URL does not match the id in the request body.");
+            }
+
             return Ok(await mediator.Send(updateProductCommand));
         }
 

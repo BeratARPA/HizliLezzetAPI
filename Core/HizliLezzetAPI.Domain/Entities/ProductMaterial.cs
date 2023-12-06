@@ -13,6 +13,8 @@ namespace HizliLezzetAPI.Domain.Entities
         public bool IsDefault { get; set; }
         public decimal Quantity { get; set; }
 
+        public virtual Restaurant Restaurant { get; set; }
+
         public virtual Product Product { get; set; }
     }
 }

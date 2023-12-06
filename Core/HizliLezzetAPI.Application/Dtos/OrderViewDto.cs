@@ -4,7 +4,6 @@
     {
         public Guid Id { get; set; }
         public Guid TicketId { get; set; }
-        public Guid SpecialProductId { get; set; }
         public decimal TotalPrice { get; set; }
         public string TerminalName { get; set; }
         public string TerminaIPAddress { get; set; }

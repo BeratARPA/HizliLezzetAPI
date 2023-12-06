@@ -27,7 +27,7 @@ namespace HizliLezzetAPI.Application.Services
                 new Claim(ClaimTypes.Email, userEmail),
             };
 
-            var secretKey = secretsRepositoryAsync.GetSecretAsync("JWT").Result;
+            var secretKey = config.GetSection("JWT:SecretKey").Value;
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

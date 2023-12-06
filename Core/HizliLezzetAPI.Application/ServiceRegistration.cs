@@ -16,7 +16,7 @@ namespace HizliLezzetAPI.Application
             serviceCollection.AddMediatR(config => config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));     
             
             serviceCollection.AddTransient<JwtTokenGenerator>();
-            serviceCollection.AddTransient<IUserAccessor, UserAccessor>();
+            serviceCollection.AddTransient<IUserAccessor, UserAccessor>();            
         }
     }
 }

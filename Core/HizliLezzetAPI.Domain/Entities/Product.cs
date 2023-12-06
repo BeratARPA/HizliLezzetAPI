@@ -19,9 +19,12 @@ namespace HizliLezzetAPI.Domain.Entities
         public bool IsActiveMigrosYemek { get; set; }
         public bool IsActiveTrendyolYemek { get; set; }
 
+        public virtual Restaurant Restaurant { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
 
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
-        public virtual ICollection<SpecialProduct> SpecialProducts { get; set; }
+        public virtual ICollection<ActiveMaterial> ActiveMaterials { get; set; }
+        public virtual ICollection<AdditionalSection> AdditionalSections { get; set; }
+        public virtual ICollection<LimitedMaterial> LimitedMaterials { get; set; }
     }
 }

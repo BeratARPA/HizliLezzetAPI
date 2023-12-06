@@ -22,6 +22,47 @@ namespace HizliLezzetAPI.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ActiveMaterial", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ActiveMaterials");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.AdditionalSection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("AdditionalSections");
+                });
+
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -125,6 +166,25 @@ namespace HizliLezzetAPI.Persistence.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.LimitedMaterial", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("LimitedMaterials");
+                });
+
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -143,8 +203,14 @@ namespace HizliLezzetAPI.Persistence.Migrations
                     b.Property<string>("LastModifiedUserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SpecialProductId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TerminaIPAddress")
                         .HasColumnType("nvarchar(max)");
@@ -254,6 +320,8 @@ namespace HizliLezzetAPI.Persistence.Migrations
 
                     b.HasIndex("ProductCategoryId");
 
+                    b.HasIndex("RestaurantId");
+
                     b.ToTable("Products");
                 });
 
@@ -279,6 +347,8 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("ProductCategories");
                 });
@@ -316,6 +386,8 @@ namespace HizliLezzetAPI.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("RestaurantId");
 
                     b.ToTable("ProductMaterials");
                 });
@@ -394,6 +466,8 @@ namespace HizliLezzetAPI.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RestaurantOwnerId");
+
                     b.ToTable("Restaurants");
                 });
 
@@ -407,6 +481,9 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("RestaurantOwners");
                 });
@@ -460,31 +537,6 @@ namespace HizliLezzetAPI.Persistence.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("RestaurantTableSections");
-                });
-
-            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.SpecialProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("RestaurantId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("SpecialProducts");
                 });
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Ticket", b =>
@@ -653,6 +705,39 @@ namespace HizliLezzetAPI.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ActiveMaterial", b =>
+                {
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.Product", "Product")
+                        .WithMany("ActiveMaterials")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.AdditionalSection", b =>
+                {
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.Product", "Product")
+                        .WithMany("AdditionalSections")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.LimitedMaterial", b =>
+                {
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.Product", "Product")
+                        .WithMany("LimitedMaterials")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Order", b =>
                 {
                     b.HasOne("HizliLezzetAPI.Domain.Entities.Ticket", "Ticket")
@@ -683,7 +768,26 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.Restaurant", "Restaurant")
+                        .WithMany("Products")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("ProductCategory");
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ProductCategory", b =>
+                {
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.Restaurant", "Restaurant")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ProductMaterial", b =>
@@ -691,10 +795,40 @@ namespace HizliLezzetAPI.Persistence.Migrations
                     b.HasOne("HizliLezzetAPI.Domain.Entities.Product", "Product")
                         .WithMany("ProductMaterials")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.Restaurant", "Restaurant")
+                        .WithMany("ProductMaterials")
+                        .HasForeignKey("RestaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Restaurant", b =>
+                {
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.RestaurantOwner", "RestaurantOwner")
+                        .WithMany("Restaurants")
+                        .HasForeignKey("RestaurantOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RestaurantOwner");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.RestaurantOwner", b =>
+                {
+                    b.HasOne("HizliLezzetAPI.Domain.Entities.ApplicationUser", "ApplicationUser")
+                        .WithOne("RestaurantOwner")
+                        .HasForeignKey("HizliLezzetAPI.Domain.Entities.RestaurantOwner", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.RestaurantTable", b =>
@@ -717,17 +851,6 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Restaurant");
-                });
-
-            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.SpecialProduct", b =>
-                {
-                    b.HasOne("HizliLezzetAPI.Domain.Entities.Product", "Product")
-                        .WithMany("SpecialProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Ticket", b =>
@@ -800,11 +923,20 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("RestaurantOwner");
+                });
+
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("ProductMaterials");
+                    b.Navigation("ActiveMaterials");
 
-                    b.Navigation("SpecialProducts");
+                    b.Navigation("AdditionalSections");
+
+                    b.Navigation("LimitedMaterials");
+
+                    b.Navigation("ProductMaterials");
                 });
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.ProductCategory", b =>
@@ -814,9 +946,20 @@ namespace HizliLezzetAPI.Persistence.Migrations
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.Restaurant", b =>
                 {
+                    b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductMaterials");
+
+                    b.Navigation("Products");
+
                     b.Navigation("RestaurantTableSections");
 
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.RestaurantOwner", b =>
+                {
+                    b.Navigation("Restaurants");
                 });
 
             modelBuilder.Entity("HizliLezzetAPI.Domain.Entities.RestaurantTable", b =>

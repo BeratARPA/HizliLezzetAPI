@@ -54,67 +54,6 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductCategories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PreperationType = table.Column<bool>(type: "bit", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RestaurantOwners",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RestaurantOwners", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Restaurants",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantOwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WorkingStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    DayOfWeek = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OpeningTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ClosingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActiveWeb = table.Column<bool>(type: "bit", nullable: false),
-                    IsActiveLocal = table.Column<bool>(type: "bit", nullable: false),
-                    IsActiveGetirYemek = table.Column<bool>(type: "bit", nullable: false),
-                    IsActiveYemekSepeti = table.Column<bool>(type: "bit", nullable: false),
-                    IsActiveMigrosYemek = table.Column<bool>(type: "bit", nullable: false),
-                    IsActiveTrendyolYemek = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Restaurants", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -221,6 +160,106 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RestaurantOwners",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RestaurantOwners", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RestaurantOwners_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Restaurants",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RestaurantOwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkingStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    DayOfWeek = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpeningTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClosingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActiveWeb = table.Column<bool>(type: "bit", nullable: false),
+                    IsActiveLocal = table.Column<bool>(type: "bit", nullable: false),
+                    IsActiveGetirYemek = table.Column<bool>(type: "bit", nullable: false),
+                    IsActiveYemekSepeti = table.Column<bool>(type: "bit", nullable: false),
+                    IsActiveMigrosYemek = table.Column<bool>(type: "bit", nullable: false),
+                    IsActiveTrendyolYemek = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Restaurants", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Restaurants_RestaurantOwners_RestaurantOwnerId",
+                        column: x => x.RestaurantOwnerId,
+                        principalTable: "RestaurantOwners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductCategories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PreperationType = table.Column<bool>(type: "bit", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductCategories_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RestaurantTableSections",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TableKeyword = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RestaurantTableSections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RestaurantTableSections_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -249,25 +288,89 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         principalTable: "ProductCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RestaurantTableSections",
+                name: "RestaurantTables",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TableKeyword = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    RestaurantTableSectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RestaurantTableSections", x => x.Id);
+                    table.PrimaryKey("PK_RestaurantTables", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RestaurantTableSections_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
+                        name: "FK_RestaurantTables_RestaurantTableSections_RestaurantTableSectionId",
+                        column: x => x.RestaurantTableSectionId,
+                        principalTable: "RestaurantTableSections",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActiveMaterials",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActiveMaterials", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActiveMaterials_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdditionalSections",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdditionalSections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AdditionalSections_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LimitedMaterials",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LimitedMaterials", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LimitedMaterials_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -294,47 +397,11 @@ namespace HizliLezzetAPI.Persistence.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SpecialProducts",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SpecialProducts", x => x.Id);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SpecialProducts_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RestaurantTables",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantTableSectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RestaurantTables", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RestaurantTables_RestaurantTableSections_RestaurantTableSectionId",
-                        column: x => x.RestaurantTableSectionId,
-                        principalTable: "RestaurantTableSections",
+                        name: "FK_ProductMaterials_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -383,8 +450,10 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TicketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SpecialProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TerminalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TerminaIPAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -429,6 +498,16 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActiveMaterials_ProductId",
+                table: "ActiveMaterials",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdditionalSections_ProductId",
+                table: "AdditionalSections",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -468,6 +547,11 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LimitedMaterials_ProductId",
+                table: "LimitedMaterials",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_TicketId",
                 table: "Orders",
                 column: "TicketId");
@@ -478,14 +562,40 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 column: "TicketId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductCategories_RestaurantId",
+                table: "ProductCategories",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductMaterials_ProductId",
                 table: "ProductMaterials",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductMaterials_RestaurantId",
+                table: "ProductMaterials",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductCategoryId",
                 table: "Products",
                 column: "ProductCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_RestaurantId",
+                table: "Products",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RestaurantOwners_UserId",
+                table: "RestaurantOwners",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Restaurants_RestaurantOwnerId",
+                table: "Restaurants",
+                column: "RestaurantOwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RestaurantTables_RestaurantTableSectionId",
@@ -496,11 +606,6 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 name: "IX_RestaurantTableSections_RestaurantId",
                 table: "RestaurantTableSections",
                 column: "RestaurantId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SpecialProducts_ProductId",
-                table: "SpecialProducts",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_RestaurantId",
@@ -517,6 +622,12 @@ namespace HizliLezzetAPI.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActiveMaterials");
+
+            migrationBuilder.DropTable(
+                name: "AdditionalSections");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -532,6 +643,9 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "LimitedMaterials");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
@@ -541,16 +655,7 @@ namespace HizliLezzetAPI.Persistence.Migrations
                 name: "ProductMaterials");
 
             migrationBuilder.DropTable(
-                name: "RestaurantOwners");
-
-            migrationBuilder.DropTable(
-                name: "SpecialProducts");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Tickets");
@@ -569,6 +674,12 @@ namespace HizliLezzetAPI.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Restaurants");
+
+            migrationBuilder.DropTable(
+                name: "RestaurantOwners");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

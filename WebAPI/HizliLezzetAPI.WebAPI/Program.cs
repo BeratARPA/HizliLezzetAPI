@@ -43,11 +43,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 //Identity
-builder.Services.AddIdentityCore<ApplicationUser>(options =>
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
-.AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -122,21 +123,20 @@ builder.Services.AddCors(opt =>
 //UserAccessor
 builder.Services.AddHttpContextAccessor();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Hýzlý Lezzet API V1");
-        options.RoutePrefix = string.Empty;
-    });
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Hýzlý Lezzet API V1");
+    options.RoutePrefix = string.Empty;
+});
 
-    //Seed
-    DataSeeder.Initialize(app);
+//Seed
+DataSeeder.Initialize(app);
 //}
 
 app.UseHttpsRedirection();

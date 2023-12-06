@@ -8,7 +8,6 @@ namespace HizliLezzetAPI.Application.Features.Commands.Order.Create
     public class CreateOrderCommand : IRequest<ServiceResponse<Guid>>
     {
         public Guid TicketId { get; set; }
-        public Guid SpecialProductId { get; set; }
         public decimal TotalPrice { get; set; }
         public string TerminalName { get; set; }
         public string TerminaIPAddress { get; set; }

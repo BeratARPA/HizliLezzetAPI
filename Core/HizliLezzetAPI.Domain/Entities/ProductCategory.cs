@@ -10,6 +10,8 @@ namespace HizliLezzetAPI.Domain.Entities
         public string Description { get; set; }
         public string Thumbnail { get; set; }
 
+        public virtual Restaurant Restaurant { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
     }
 }

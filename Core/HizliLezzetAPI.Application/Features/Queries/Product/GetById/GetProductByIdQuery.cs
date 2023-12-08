@@ -23,7 +23,7 @@ namespace HizliLezzetAPI.Application.Features.Queries.Product.GetById
 
             public async Task<ServiceResponse<ProductViewDto>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
             {
-                var product = await productRepository.GetByIdAsync(request.Id);
+                var product = await productRepository.GetByIdAsync(request.Id, true);
 
                 var viewModel = mapper.Map<ProductViewDto>(product);
 

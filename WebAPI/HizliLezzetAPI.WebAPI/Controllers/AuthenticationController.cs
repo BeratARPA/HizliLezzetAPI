@@ -3,7 +3,6 @@ using HizliLezzetAPI.Application.Wrappers;
 using HizliLezzetAPI.Domain.Entities;
 using HizliLezzetAPI.WebApi.Dtos;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

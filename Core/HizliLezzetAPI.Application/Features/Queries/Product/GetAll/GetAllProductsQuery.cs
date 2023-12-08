@@ -21,7 +21,7 @@ namespace HizliLezzetAPI.Application.Features.Queries.Product.GetAll
 
             public async Task<ServiceResponse<List<ProductViewDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
             {
-                var products = await productRepository.GetAllAsync();
+                var products = await productRepository.GetAllAsync(true);
 
                 var viewModel = mapper.Map<List<ProductViewDto>>(products);
 

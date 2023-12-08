@@ -32,6 +32,10 @@ namespace HizliLezzetAPI.Application.Mapping
         {
             //Product Mapping
             CreateMap<Domain.Entities.Product, Dtos.ProductViewDto>()
+                .ForMember(dest => dest.ProductMaterials, opt => opt.MapFrom(src => src.ProductMaterials))
+                .ForMember(dest => dest.ActiveMaterials, opt => opt.MapFrom(src => src.ActiveMaterials))
+                .ForMember(dest => dest.LimitedMaterials, opt => opt.MapFrom(src => src.LimitedMaterials))
+                .ForMember(dest => dest.AdditionalSections, opt => opt.MapFrom(src => src.AdditionalSections))
                 .ReverseMap();
             CreateMap<Domain.Entities.Product, CreateProductCommand>()
                 .ReverseMap();
@@ -39,6 +43,22 @@ namespace HizliLezzetAPI.Application.Mapping
              .ReverseMap();
             CreateMap<Domain.Entities.Product, UpdateProductCommand>()
              .ReverseMap();
+
+            //ProductMaterials Mapping
+            CreateMap<Domain.Entities.ProductMaterial, Dtos.ProductMaterialViewDto>()
+                .ReverseMap();
+
+            //ActiveMaterials Mapping
+            CreateMap<Domain.Entities.ActiveMaterial, Dtos.ActiveMaterialViewDto>()
+                .ReverseMap();
+
+            //LimitedMaterials Mapping
+            CreateMap<Domain.Entities.LimitedMaterial, Dtos.LimitedMaterialViewDto>()
+                .ReverseMap();
+
+            //AdditionalSections Mapping
+            CreateMap<Domain.Entities.AdditionalSection, Dtos.AdditionalSectionViewDto>()
+                .ReverseMap();
 
             //ProductCategory Mapping
             CreateMap<Domain.Entities.ProductCategory, Dtos.ProductCategoryViewDto>()

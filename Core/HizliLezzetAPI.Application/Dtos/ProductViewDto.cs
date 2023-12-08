@@ -17,5 +17,10 @@
         public bool IsActiveYemekSepeti { get; set; }
         public bool IsActiveMigrosYemek { get; set; }
         public bool IsActiveTrendyolYemek { get; set; }
+
+        public virtual ICollection<ProductMaterialViewDto> ProductMaterials { get; set; }
+        public virtual ICollection<ActiveMaterialViewDto> ActiveMaterials { get; set; }
+        public virtual ICollection<AdditionalSectionViewDto> AdditionalSections { get; set; }
+        public virtual ICollection<LimitedMaterialViewDto> LimitedMaterials { get; set; }
     }
 }
